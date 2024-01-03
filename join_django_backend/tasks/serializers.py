@@ -5,4 +5,4 @@ from .models import Task
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Task
-        fields = ['id', 'title']
+        fields = '__all__' 
