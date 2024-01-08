@@ -52,12 +52,14 @@ class TaskViewSet(viewsets.ModelViewSet):
                                     description = newTask['description'], 
                                     category = newTask['category'],
                                     created_at = date_obj, 
-                                    assigned = newTask['assigned'],
+                                    #assigned = newTask['assigned'],
                                     kanban = newTask['kanban'], 
                                     priority = newTask['priority'], 
                                     subtasks = newTask['subtasks'], 
                                     subtasksstatus = newTask['subtaskStatus'],
                                     ) 
+        
+        task.assigned.set()
         
         serialized_obj = serializers.serialize('json', [task, ]) 
     
