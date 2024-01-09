@@ -24,6 +24,8 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'tasks', views.TaskViewSet)
+router.register(r'contacts', views.ContactViewSet)
+
 
 urlpatterns = [
     path('', include(router.urls)),

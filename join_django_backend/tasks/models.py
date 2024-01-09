@@ -1,4 +1,5 @@
 import datetime
+import json
 from django.db import models
 
 class Contact(models.Model): 
@@ -8,8 +9,6 @@ class Contact(models.Model):
     tel = models.CharField(max_length=64, blank=True)
     bgIconColor = models.CharField(max_length=64, blank=True)
 
-
-# Create your models here.
 class Task(models.Model): 
     title = models.CharField(max_length=256, blank=True)
     description = models.CharField(max_length=256, blank=True)
@@ -20,6 +19,3 @@ class Task(models.Model):
     assigned =  models.ManyToManyField(Contact, blank=True, related_name='assignees')
     subtasksstatus = models.JSONField(max_length=1024, blank=True)
     subtasks = models.JSONField(max_length=1024, blank=True)
-
-
-
