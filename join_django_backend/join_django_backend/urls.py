@@ -26,7 +26,6 @@ router = routers.DefaultRouter()
 router.register(r'tasks', views.TaskViewSet)
 router.register(r'contacts', views.ContactViewSet)
 
-
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),

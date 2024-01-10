@@ -19,7 +19,7 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
     """
 
 class ContactSerializer(serializers.HyperlinkedModelSerializer):
-     class Meta:
+    class Meta:
         model = Contact
-        fields = '__all__'
+        fields = ['id', 'firstName' , 'lastName', 'email', 'tel', 'bgIconColor']
     

@@ -51,3 +51,22 @@ class TaskViewSet(viewsets.ModelViewSet):
 class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+
+
+    def create(self, request):
+        newContact = json.loads(request.body)
+        contact = Contact.objects.create(
+                    firstName = newContact['firstName'], 
+                    lastName = newContact['lastName'], 
+                    email = newContact['email'], 
+                    tel = newContact['tel'], 
+                    bgIconColor = newContact['bgIconColor'], 
+        )
+        return HttpResponse(request.body, content_type='application/json')
+
+    def delete(self, request, pk, format=None):
+
+        print("DELTE OBJECTB REQUEST")
+        contact_to_delete = self.get_object(pk)
+        contact_to_delete.delete()
+        
