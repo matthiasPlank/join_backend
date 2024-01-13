@@ -38,7 +38,7 @@ class TaskViewSet(viewsets.ModelViewSet):
                                     kanban = newTask['kanban'], 
                                     priority = newTask['priority'], 
                                     subtasks = newTask['subtasks'], 
-                                    subtasksstatus = newTask['subtaskStatus'],
+                                    subtaskStatus = newTask['subtaskStatus'],
                                     ) 
         
         for contacts in newTask['assigned']: 
@@ -47,6 +47,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         serialized_obj = serializers.serialize('json', [task, ]) 
     
         return HttpResponse(serialized_obj, content_type='application/json')
+    
 
 class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()

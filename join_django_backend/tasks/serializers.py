@@ -6,10 +6,10 @@ from .models import Task, Contact
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
 
     assigned = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-
+    dueDate = serializers.DateField(source='created_at') 
     class Meta:
         model = Task
-        fields = '__all__'
+        fields = ['id', 'assigned' , 'category', 'dueDate', 'description', 'kanban', 'priority', 'subtasks', 'subtaskStatus', 'title']
     
     """
     def to_representation(self, instance):

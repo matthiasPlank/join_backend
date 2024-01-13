@@ -17,5 +17,5 @@ class Task(models.Model):
     kanban = models.CharField(max_length=64, blank=True)
     priority = models.CharField(max_length=64, blank=True)
     assigned =  models.ManyToManyField(Contact, blank=True, related_name='assignees')
-    subtasksstatus = models.JSONField(max_length=1024, blank=True)
+    subtaskStatus = models.JSONField(max_length=1024, blank=True)
     subtasks = models.JSONField(max_length=1024, blank=True)

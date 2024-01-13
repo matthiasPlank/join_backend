@@ -34,8 +34,6 @@ class CustomAuthToken(ObtainAuthToken):
         return HttpResponse(json.dumps(responseJSON), content_type='application/json')
      
 
-
-
 def register_view(request):
     
     if request.method == 'POST':
