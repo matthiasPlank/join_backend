@@ -11,6 +11,9 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from login.functions import getUsernameFromEmail, username_exists
+from django.views.decorators.csrf import csrf_protect
+
+
 
 class CustomAuthToken(ObtainAuthToken):
 
@@ -28,7 +31,8 @@ class CustomAuthToken(ObtainAuthToken):
         responseJSON = {
             'token': token.key,
             'user_id': user.pk,
-            'email': user.email
+            'email': user.email, 
+            'username': user.username
         }
     
         return HttpResponse(json.dumps(responseJSON), content_type='application/json')
@@ -55,7 +59,16 @@ def register_view(request):
                     loginSuccess = {
                         'token': token.key,
                         'user_id': user.pk,
-                        'email': user.email }
+                        'email': user.email, 
+                        'username': user.username }
                     return JsonResponse(loginSuccess, safe=False)   
                 return HttpResponse('No User')   
     return HttpResponse('No POST Request')
+
+@csrf_protect
+def check_token_view(request):
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        print(data['token'])
+        print(data['email'])

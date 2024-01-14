@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.common.CommonMiddleware",
+    "django.middleware.common.CommonMiddleware"
 ]
 
 ROOT_URLCONF = 'join_django_backend.urls'
@@ -134,6 +134,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
 
@@ -144,3 +145,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200", 
     "http://127.0.0.1:5500",
 ]
+CSRF_TRUSTED_ORIGINS = [  
+    "http://localhost:8080",
+    "http://127.0.0.1:9000", 
+    "http://127.0.0.1:8000", 
+    "http://localhost:4200", 
+    "http://localhost:8080", 
+    "http://127.0.0.1:5500",]

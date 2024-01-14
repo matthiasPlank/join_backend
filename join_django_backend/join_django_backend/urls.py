@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from login.views import CustomAuthToken , register_view
+from login.views import CustomAuthToken , register_view , check_token_view
 from tasks import views as tasks_views
 from login import views as login_views
 
@@ -37,5 +37,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-token-auth/', CustomAuthToken.as_view()),
     path('register/', csrf_exempt(register_view)),
+    path('checkToken/', check_token_view)
 
 ]
