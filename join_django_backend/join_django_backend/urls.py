@@ -22,7 +22,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 from rest_framework import routers
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 
 from rest_framework.authtoken import views as auth_views
@@ -37,6 +37,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-token-auth/', CustomAuthToken.as_view()),
     path('register/', csrf_exempt(register_view)),
-    path('checkToken/', check_token_view)
+    path('checkToken/', csrf_exempt(check_token_view))
 
 ]

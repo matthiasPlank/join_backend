@@ -11,7 +11,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from login.functions import getUsernameFromEmail, username_exists
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, requires_csrf_token
 
 
 
@@ -65,10 +65,16 @@ def register_view(request):
                 return HttpResponse('No User')   
     return HttpResponse('No POST Request')
 
-@csrf_protect
-def check_token_view(request):
 
+def check_token_view(request):
+    print("Hello Auth request")
     if request.method == 'POST':
         data = json.loads(request.body)
         print(data['token'])
         print(data['email'])
+        user = User.objects.get(email=data['email'])
+        userToken = Token.objects.get(user=user)
+        print(userToken)
+        if data['token'] == userToken.key: 
+             return HttpResponse(True)
+    return HttpResponse(False)
