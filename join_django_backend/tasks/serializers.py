@@ -11,13 +11,6 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
         model = Task
         fields = ['id', 'assigned' , 'category', 'dueDate', 'description', 'kanban', 'priority', 'subtasks', 'subtaskStatus', 'title']
     
-    """
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-
-        return representation
-    """
-
 class ContactSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Contact

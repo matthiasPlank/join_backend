@@ -17,11 +17,13 @@ from django.views.decorators.csrf import csrf_protect, requires_csrf_token
 
 class CustomAuthToken(ObtainAuthToken):
 
+    """
+    CHECK login credentials and return Token
+    """
     def post(self, request, *args, **kwargs):
 
         user = User.objects.get(email=request.data['email'])
         request.data['username'] = user.username
-    
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
         serializer.is_valid(raise_exception=True)
@@ -34,16 +36,15 @@ class CustomAuthToken(ObtainAuthToken):
             'email': user.email, 
             'username': user.username
         }
-    
         return HttpResponse(json.dumps(responseJSON), content_type='application/json')
      
-
+"""
+Register new User function
+"""
 def register_view(request):
     
     if request.method == 'POST':
         data = json.loads(request.body)
-        print(data['email'])
-        print(data['password'])
         username = getUsernameFromEmail(data['email'])
         if username_exists(username):
                 loginFailed = { 'wrongPassword' : False , 
@@ -55,7 +56,6 @@ def register_view(request):
                 if user: 
                     login(request, user)
                     token, created = Token.objects.get_or_create(user=user)
-                    print(token)
                     loginSuccess = {
                         'token': token.key,
                         'user_id': user.pk,
@@ -65,13 +65,12 @@ def register_view(request):
                 return HttpResponse('No User')   
     return HttpResponse('No POST Request')
 
-
+"""
+Check if user Token is valid
+"""
 def check_token_view(request):
-    print("Hello Auth request")
     if request.method == 'POST':
         data = json.loads(request.body)
-        print(data['token'])
-        print(data['email'])
         user = User.objects.get(email=data['email'])
         userToken = Token.objects.get(user=user)
         print(userToken)
