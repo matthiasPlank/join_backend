@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-dyfa9q=j^tpa%tnrlyk!q35(2!g8l)r3pljp-&-kwax(l-lf7n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+        "https://matthiasplank.pythonanywhere.com/"
+]
 
 
 # Application definition
@@ -145,6 +147,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000", 
     "http://localhost:4200", 
     "http://127.0.0.1:5500",
+    "https://matthiasplank.pythonanywhere.com/"
 ]
 CSRF_TRUSTED_ORIGINS = [  
     "http://localhost:8080",
@@ -152,4 +155,5 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:8000", 
     "http://localhost:4200", 
     "http://localhost:8080", 
-    "http://127.0.0.1:5500",]
+    "http://127.0.0.1:5500",
+    "https://matthiasplank.pythonanywhere.com/"]
