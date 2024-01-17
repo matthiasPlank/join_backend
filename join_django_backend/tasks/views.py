@@ -9,6 +9,8 @@ from datetime import datetime
 from .models import Contact
 
 from django.contrib.auth.decorators import login_required
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
@@ -16,8 +18,8 @@ class TaskViewSet(viewsets.ModelViewSet):
 
     queryset = Task.objects.all().order_by('-created_at')
     serializer_class = TaskSerializer
-    #authentication_classes = [TokenAuthentication]
-    #permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     """
     GET ALL TASKS Function
@@ -27,7 +29,6 @@ class TaskViewSet(viewsets.ModelViewSet):
         serialized_obj = serializers.serialize('json', [tasks, ]) 
         return HttpResponse(serialized_obj, content_type='application/json')
      
-
     """
     CREATE NEW TASK Function
     """
@@ -60,6 +61,9 @@ class TaskViewSet(viewsets.ModelViewSet):
 class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
 
     """
     CREATE NEW Contact Function
@@ -80,7 +84,6 @@ class ContactViewSet(viewsets.ModelViewSet):
     """
     def delete(self, request, pk, format=None):
 
-        print("DELTE OBJECTB REQUEST")
         contact_to_delete = self.get_object(pk)
         contact_to_delete.delete()
         
