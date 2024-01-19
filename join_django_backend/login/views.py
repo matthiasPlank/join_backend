@@ -42,7 +42,7 @@ class CustomAuthToken(ObtainAuthToken):
 Register new User function
 """
 def register_view(request):
-    
+
     if request.method == 'POST':
         data = json.loads(request.body)
         username = getUsernameFromEmail(data['email'])
@@ -73,7 +73,6 @@ def check_token_view(request):
         data = json.loads(request.body)
         user = User.objects.get(email=data['email'])
         userToken = Token.objects.get(user=user)
-        print(userToken)
         if data['token'] == userToken.key: 
              return HttpResponse(True)
     return HttpResponse(False)

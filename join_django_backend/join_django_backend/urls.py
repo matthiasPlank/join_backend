@@ -38,5 +38,4 @@ urlpatterns = [
     path('api-token-auth/', CustomAuthToken.as_view()),
     path('register/', csrf_exempt(register_view)),
     path('checkToken/', csrf_exempt(check_token_view))
-
 ]
