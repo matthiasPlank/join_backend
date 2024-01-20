@@ -1,4 +1,5 @@
 import json
+import statistics
 from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import viewsets
@@ -57,6 +58,22 @@ class TaskViewSet(viewsets.ModelViewSet):
     
         return HttpResponse(serialized_obj, content_type='application/json')
     
+
+    """
+    UPDATES NEW TASK Function
+    """
+    def update(self, request, pk):
+        print("My Sended PUT Request")
+        editedTask = json.loads(request.body)
+        instance = Task.objects.get(pk=pk)
+      
+        instance.assigned.clear(); 
+        for contacts in editedTask['assigned']: 
+            instance.assigned.add(Contact.objects.get(pk=contacts['id'])) 
+
+        instance.save(); 
+        serialized_obj = serializers.serialize('json', [instance, ]) 
+        return HttpResponse(serialized_obj, content_type='application/json')
 
 class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
