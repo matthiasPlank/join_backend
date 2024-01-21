@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from login.views import CustomAuthToken , register_view , check_token_view
+from login.views import CustomAuthToken, register_view , check_token_view , reset_password_view
 from tasks import views as tasks_views
 from login import views as login_views
 
@@ -24,8 +24,12 @@ from django.urls import include, path
 from rest_framework import routers
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
+from django.contrib.auth import views as auth_views
+from django.urls import path, include
 
-from rest_framework.authtoken import views as auth_views
+
+
+
 
 router = routers.DefaultRouter()
 router.register(r'tasks', tasks_views.TaskViewSet)
@@ -37,5 +41,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-token-auth/', CustomAuthToken.as_view()),
     path('register/', csrf_exempt(register_view)),
-    path('checkToken/', csrf_exempt(check_token_view))
+    path('checkToken/', csrf_exempt(check_token_view)),
+    path('custom-reset-password/', csrf_exempt(reset_password_view)),
+    path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
+
+   
 ]

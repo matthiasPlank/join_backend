@@ -54,7 +54,7 @@ class URLTaskTests(TestCase):
                 "priority": "medium",
                 "subtasks": [
                     "Test",
-                    "Test"
+                    "Test" 
                 ],
                 "subtaskStatus": [
                     False,
@@ -62,7 +62,7 @@ class URLTaskTests(TestCase):
                 ]
             }
         path = '/tasks/' + data['id'] + '/'
-        response = self.client.put(path, json.dumps(data), content_type='application/json', headers=getAuthForTest(self))
+        response = self.client.put(path, json.dumps(data), content_type='application/json', headers=get4AuthForTest(self))
         self.assertEqual(response.status_code, 200)
 
 

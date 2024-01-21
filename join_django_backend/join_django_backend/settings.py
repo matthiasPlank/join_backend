@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
         "127.0.0.1",
+        "localhost"
         "matthiasplank.pythonanywhere.com"
 ]
 
@@ -46,14 +47,14 @@ INSTALLED_APPS = [
     "rest_framework", 
     "rest_framework.authtoken", 
     "corsheaders",
+    "django_rest_passwordreset"
 ]
 
 MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.common.CommonMiddleware', 
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -160,4 +161,19 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8080", 
     "http://127.0.0.1:5500",
     "https://matthiasplank.pythonanywhere.com"
-    ]
+]
+
+
+DJANGO_REST_MULTITOKENAUTH_RESET_TOKEN_EXPIRY_TIME = 24  # time in hours (Default: 24)
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_PORT = 587  # For TLS
+EMAIL_HOST_USER = 'matthiasplank9@gmail.com'
+EMAIL_HOST_PASSWORD = 'joinBackend1234!'
+
+
