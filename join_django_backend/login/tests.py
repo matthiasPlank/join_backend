@@ -14,7 +14,7 @@ class LoginTests(TestCase):
             "email": "test@test.at",
             "password": "test_user"
         }
-        response = self.client.post('/api-token-auth/' , data=json.dumps(data) , content_type='application/json') 
+        response = self.client.post('/api/api-token-auth/' , data=json.dumps(data) , content_type='application/json') 
         self.assertEqual(response.status_code, 200)
 
 
@@ -27,7 +27,7 @@ class LoginTests(TestCase):
             "password": "test_user", 
             "username": "test_user"
         }
-        response = self.client.post('/register/' , data=json.dumps(data) , content_type='application/json') 
+        response = self.client.post('/api/register/' , data=json.dumps(data) , content_type='application/json') 
         self.assertEqual(response.status_code, 200)        
 
  """
@@ -40,7 +40,7 @@ class LoginTests(TestCase):
             "email" : "test@test.at",
             "token" : userToken.key
         }
-        response = self.client.post('/checkToken/' , data=json.dumps(data) , content_type='application/json') 
+        response = self.client.post('/api/checkToken/' , data=json.dumps(data) , content_type='application/json') 
         return response            
 
 """

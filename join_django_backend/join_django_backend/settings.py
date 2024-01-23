@@ -166,14 +166,4 @@ CSRF_TRUSTED_ORIGINS = [
 
 DJANGO_REST_MULTITOKENAUTH_RESET_TOKEN_EXPIRY_TIME = 24  # time in hours (Default: 24)
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_PORT = 587  # For TLS
-EMAIL_HOST_USER = 'matthiasplank9@gmail.com'
-EMAIL_HOST_PASSWORD = ''
-
 
