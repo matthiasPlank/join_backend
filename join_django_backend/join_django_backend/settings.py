@@ -163,21 +163,3 @@ CSRF_TRUSTED_ORIGINS = [
     "https://matthiasplank.pythonanywhere.com"
 ]
 
-
-<<<<<<< HEAD
-DJANGO_REST_MULTITOKENAUTH_RESET_TOKEN_EXPIRY_TIME = 24  # time in hours (Default: 24)
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
-EMAIL_PORT = 587  # For TLS
-EMAIL_HOST_USER = 'matthias.plank@gmx.at'
-EMAIL_HOST_PASSWORD = 'Matpl1992!'
-=======
-#DJANGO_REST_MULTITOKENAUTH_RESET_TOKEN_EXPIRY_TIME = 24  # time in hours (Default: 24)
->>>>>>> 223d19f55de6b3e688da80f0a4fccbbb654452de
-
-
