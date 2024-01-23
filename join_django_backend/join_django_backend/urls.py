@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from login.views import CustomAuthToken, register_view , check_token_view , reset_password_view
+from login.views import CustomAuthToken, register_view , check_token_view 
 from tasks import views as tasks_views
 from login import views as login_views
 
@@ -28,22 +28,16 @@ from django.contrib.auth import views as auth_views
 from django.urls import path, include
 
 
-
-
-
 router = routers.DefaultRouter()
-router.register(r'tasks', tasks_views.TaskViewSet)
-router.register(r'contacts', tasks_views.ContactViewSet)
+router.register(r'api/tasks', tasks_views.TaskViewSet)
+router.register(r'api/contacts', tasks_views.ContactViewSet)
+router.register(r'api/users', login_views.UserViewSet)
 
 
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('api-token-auth/', CustomAuthToken.as_view()),
-    path('register/', csrf_exempt(register_view)),
-    path('checkToken/', csrf_exempt(check_token_view)),
-    path('custom-reset-password/', csrf_exempt(reset_password_view)),
-    path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
-
-   
+    path('api/api-token-auth/', CustomAuthToken.as_view()),
+    path('api/register/', csrf_exempt(register_view)),
+    path('api/checkToken/', csrf_exempt(check_token_view)),
 ]

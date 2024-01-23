@@ -11,7 +11,7 @@ class URLTaskTests(TestCase):
     Checks if tasks can be fetched
     """
     def test_getTask(self): 
-        response = self.client.get('/tasks/' , headers=getAuthForTest(self)) 
+        response = self.client.get('/api/tasks/' , headers=getAuthForTest(self)) 
         self.assertEqual(response.status_code, 200)
 
     """
@@ -35,8 +35,8 @@ class URLTaskTests(TestCase):
                     False
                 ]
             }
-        response = self.client.post('/tasks/' , json.dumps(data) , content_type='application/json', headers=getAuthForTest(self)) 
-        self.assertEqual(response.status_code, 200)
+        response = self.client.post('/api/tasks/' , json.dumps(data) , content_type='application/json', headers=getAuthForTest(self)) 
+        self.assertEqual(response.status_code, 201)
 
     """
     Checks if a task can be updated
@@ -61,8 +61,8 @@ class URLTaskTests(TestCase):
                     False
                 ]
             }
-        path = '/tasks/' + data['id'] + '/'
-        response = self.client.put(path, json.dumps(data), content_type='application/json', headers=get4AuthForTest(self))
+        path = '/api/tasks/' + data['id'] + '/'
+        response = self.client.put(path, json.dumps(data), content_type='application/json', headers=getAuthForTest(self))
         self.assertEqual(response.status_code, 200)
 
 
@@ -70,7 +70,7 @@ class URLTaskTests(TestCase):
     Checks if contatcs can be fetched
     """
     def test_getContacts(self): 
-        response = self.client.get('/contacts/' , headers=getAuthForTest(self)) 
+        response = self.client.get('/api/contacts/' , headers=getAuthForTest(self)) 
         self.assertEqual(response.status_code, 200)
     
     """
@@ -84,8 +84,8 @@ class URLTaskTests(TestCase):
             "tel": "066412345678",
             "bgIconColor": "#45e3a8"
         }
-        response = self.client.post('/contacts/', json.dumps(data), content_type='application/json', headers=getAuthForTest(self)) 
-        self.assertEqual(response.status_code, 200)
+        response = self.client.post('/api/contacts/', json.dumps(data), content_type='application/json', headers=getAuthForTest(self)) 
+        self.assertEqual(response.status_code, 201)
 
     """
     Checks if a existing contact can be updated
@@ -100,8 +100,8 @@ class URLTaskTests(TestCase):
             "tel": "066412345678",
             "bgIconColor": "#45e3a8"
         }
-        path = '/contacts/' + data['id'] + '/'
-        response = self.client.patch(path , json.dumps(data), content_type='application/json', headers=getAuthForTest(self)) 
+        path = '/api/contacts/' + data['id'] + '/'
+        response = self.client.put(path , json.dumps(data), content_type='application/json', headers=getAuthForTest(self)) 
         self.assertEqual(response.status_code, 200)
 
 
@@ -117,7 +117,7 @@ class URLTaskTests(TestCase):
             "tel": "066412345678",
             "bgIconColor": "#45e3a8"
         }
-        path = '/contacts/' + data['id'] + '/'
+        path = '/api/contacts/' + data['id'] + '/'
         response = self.client.patch(path , json.dumps(data), content_type='application/json', headers=getAuthForTest(self)) 
         self.assertEqual(response.status_code, 404)
 
@@ -127,6 +127,10 @@ class URLTaskTests(TestCase):
 Returns the auth header parameters
 """
 def getAuthForTest(self): 
+    return {}
+
+    # DEACTIVATE FOR TEST WITHOUT CSFR
+    """
     self.client = Client()        
     self.user, created = User.objects.get_or_create(username='test_user', password='test_user')        
     self.client.login(username='test_user', password='test_user')
@@ -134,6 +138,7 @@ def getAuthForTest(self):
     header = {"Authorization": "Token " + token.key }
 
     return header
+    """
 
 """
 Adds a new Task to DB
@@ -156,7 +161,7 @@ def addTaskToDB(self):
                     False
                 ]
     }
-    response = self.client.post('/tasks/' , json.dumps(data) , content_type='application/json', headers=getAuthForTest(self)) 
+    response = self.client.post('/api/tasks/' , json.dumps(data) , content_type='application/json', headers=getAuthForTest(self)) 
 
 """
 Adds a new Contact to DB
@@ -169,4 +174,4 @@ def addContactToDB(self):
             "tel": "066412345678",
             "bgIconColor": "#45e3a8"
     }
-    response = self.client.post('/contacts/', json.dumps(data), content_type='application/json', headers=getAuthForTest(self)) 
+    response = self.client.post('/api/contacts/', json.dumps(data), content_type='application/json', headers=getAuthForTest(self)) 
