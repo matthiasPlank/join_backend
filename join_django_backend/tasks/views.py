@@ -111,7 +111,7 @@ class ContactViewSet(viewsets.ModelViewSet):
     """
     CREATE NEW Contact Function
     """
-    def create(self, request):
+    def post(self, request):
         newContact = json.loads(request.body)
         try:
             contact = Contact.objects.create(
