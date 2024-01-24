@@ -88,13 +88,13 @@ class TaskViewSet(viewsets.ModelViewSet):
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST )
         
     """
-    UPDATES NEW TASK Function
+    DELETES A TASK Function
     """
     def delete(self, request, pk, format=None):
         try: 
             task_to_delete = self.get_object(pk)
             task_to_delete.delete()
-            return HttpResponse(status=status.HTTP_200_OK)
+            return HttpResponse(status=status.HTTP_204_NO_CONTENT)
         except: 
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST )
         
@@ -146,6 +146,7 @@ class ContactViewSet(viewsets.ModelViewSet):
         try:
             contact_to_delete = self.get_object(pk)
             contact_to_delete.delete()
+            return HttpResponse(status=status.HTTP_204_NO_CONTENT)
         except: 
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST )
         

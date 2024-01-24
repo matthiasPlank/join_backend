@@ -65,6 +65,16 @@ class URLTaskTests(TestCase):
         response = self.client.put(path, json.dumps(data), content_type='application/json', headers=getAuthForTest(self))
         self.assertEqual(response.status_code, 200)
 
+    """
+    Checks if a task can be deleted
+    """
+    def test_deleteExistingTask(self): 
+        addTaskToDB(self)
+        path = '/api/tasks/' + '1' + '/'
+        response = self.client.delete(path, content_type='application/json', headers=getAuthForTest(self))
+        self.assertEqual(response.status_code, 204)
+
+class URLContactsTests(TestCase): 
 
     """
     Checks if contatcs can be fetched
@@ -121,7 +131,37 @@ class URLTaskTests(TestCase):
         response = self.client.patch(path , json.dumps(data), content_type='application/json', headers=getAuthForTest(self)) 
         self.assertEqual(response.status_code, 404)
 
+    """
+    Checks if a contact can be deleted
+    """
+    def test_deleteExistingTask(self): 
+        addContactToDB(self)
+        path = '/api/contacts/' + '1' + '/'
+        response = self.client.delete(path, content_type='application/json', headers=getAuthForTest(self))
+        self.assertEqual(response.status_code, 204)
+    
 
+class URLUsersTests(TestCase): 
+    """
+    Checks if users can be fetched
+    """
+    def test_getContacts(self): 
+        response = self.client.get('/api/users/' , headers=getAuthForTest(self)) 
+        self.assertEqual(response.status_code, 200)
+
+
+    """
+    Checks if a user contact can be created
+    """
+    def test_updateExistingContact(self): 
+        data = {
+            "first_name": "Test",
+            "last_name": "User",
+            "username": "testuser",
+            "email": "test@user.at"
+        }
+        response = self.client.post('/api/users/' , json.dumps(data) , content_type='application/json', headers=getAuthForTest(self)) 
+        self.assertEqual(response.status_code, 201)
 
 """
 Returns the auth header parameters
