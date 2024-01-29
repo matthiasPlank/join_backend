@@ -27,17 +27,6 @@ class TaskViewSet(viewsets.ModelViewSet):
     #permission_classes = [IsAuthenticated]
 
     """
-    GET ALL TASKS Function
-    """
-    def get(self, request, format=None):
-        try: 
-            tasks = Task.objects.all()
-            serialized_obj = serializers.serialize('json', [tasks, ]) 
-            return HttpResponse(serialized_obj, content_type='application/json')
-        except:
-            return HttpResponse(status=status.HTTP_400_BAD_REQUEST )
-     
-    """
     CREATE NEW TASK Function
     """
     def post(self, request):
@@ -80,25 +69,14 @@ class TaskViewSet(viewsets.ModelViewSet):
             for contacts in editedTask['assigned']: 
                 instance.assigned.add(Contact.objects.get(pk=contacts['id'])) 
 
-            instance.save(); 
+            instance.save() 
             serialized_obj = serializers.serialize('json', [instance, ]) 
             return HttpResponse(serialized_obj, content_type='application/json')
         
         except: 
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST )
         
-    """
-    DELETES A TASK Function
-    """
-    def delete(self, request, pk, format=None):
-        try: 
-            task_to_delete = self.get_object(pk)
-            task_to_delete.delete()
-            return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-        except: 
-            return HttpResponse(status=status.HTTP_400_BAD_REQUEST )
-        
-        
+
 class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
@@ -133,20 +111,8 @@ class ContactViewSet(viewsets.ModelViewSet):
         try: 
             instance = Contact.objects.get(pk=pk)
             instance = editedContact
-            instance.save(); 
+            instance.save()
             serialized_obj = serializers.serialize('json', [instance, ]) 
             return HttpResponse(serialized_obj, content_type='application/json')
         except: 
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST )
-
-    """
-    DELETE Contact Function
-    """
-    def delete(self, request, pk, format=None):
-        try:
-            contact_to_delete = self.get_object(pk)
-            contact_to_delete.delete()
-            return HttpResponse(status=status.HTTP_204_NO_CONTENT)
-        except: 
-            return HttpResponse(status=status.HTTP_400_BAD_REQUEST )
-        
