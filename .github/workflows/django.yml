@@ -27,4 +27,5 @@ jobs:
         pip install -r join_django_backend/requirements.txt
     - name: Run Tests
       run: |
+        cd ..
         python join_django_backend/manage.py test
