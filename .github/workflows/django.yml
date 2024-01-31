@@ -28,4 +28,4 @@ jobs:
     - name: Run Tests
       run: |
         cd ..
-        python join_django_backend/manage.py test
+        python join_django_backend/join_django_backend/manage.py test
