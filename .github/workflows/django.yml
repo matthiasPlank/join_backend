@@ -28,3 +28,4 @@ jobs:
     - name: Run Tests
       run: |
         python join_django_backend/manage.py test login
+        python join_django_backend/manage.py test tasks
